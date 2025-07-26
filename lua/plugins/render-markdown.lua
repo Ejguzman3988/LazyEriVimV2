@@ -285,26 +285,6 @@ return {
         vim.keymap.set("n", "<leader>cancel", function() M.set_state("/") end,
           { buffer = true, desc = "Set Task to Cancelled" })
         vim.keymap.set("n", "<leader>C", M.append_task, { buffer = true, desc = "Append New Task" })
-
-        -- ADDED: Keymap for automatically continuing a task list
-        vim.keymap.set("i", "<CR>", function()
-          local line = vim.api.nvim_get_current_line()
-          -- If the current line is a task list item...
-          if line:match("^%s*-%s*%[.%]") then
-            -- ...and the text after the checkbox is empty...
-            if line:match("^%s*-%s*%[.%]%s*$") then
-              -- ...then delete the empty task item and create a normal new line.
-              vim.api.nvim_set_current_line(line:gsub("%- %[.%]%s*$", ""), false)
-              return vim.api.nvim_replace_termcodes("<CR><CR>", true, true, true)
-            else
-              -- ...otherwise, create a new line with a fresh todo checkbox.
-              return vim.api.nvim_replace_termcodes("<CR>- [ ] ", true, true, true)
-            end
-          else
-            -- If not a task line, just act like a normal Enter press.
-            return vim.api.nvim_replace_termcodes("<CR>", true, true, true)
-          end
-        end, { buffer = true, expr = true, desc = "Continue markdown task list" })
       end,
     })
 
