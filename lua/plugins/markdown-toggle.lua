@@ -25,7 +25,7 @@ return {
       -- Skip blank lines and headings in Visual mode (except for `quote()`)
       enable_blankhead_skip = true,
       -- Insert an indented quote for new lines within quoted text
-      enable_inner_indent = false,
+      enable_inner_indent = true,
       -- Toggle only unmarked lines first
       enable_unmarked_only = true,
       -- Automatically continue lists on new lines
